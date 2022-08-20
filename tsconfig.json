@@ -17,7 +17,11 @@
     "noUnusedParameters": true,
     "noImplicitAny": false,
     "noImplicitThis": false,
-    "strictNullChecks": false
+    "strictNullChecks": false,
+    "baseUrl": "src",
+    "paths": {
+      "@app/*": ["*"]
+    }
   },
   "include": ["src/**/*", "__tests__/**/*"]
 }
