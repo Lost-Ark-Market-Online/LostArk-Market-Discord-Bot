@@ -14,4 +14,9 @@ export default class DiscordInteraction implements IDiscordInteraction {
       ?.value as unknown;
     return option ? (option as T) : undefined;
   }
+
+  getFocusedOption() {
+    if (!this.data.options) return;
+    return this.data.options.find((option) => option.focused);
+  }
 }

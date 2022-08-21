@@ -5,6 +5,7 @@ import { log } from '@app/utils/Logger';
 import { InteractionResponseType, InteractionType } from 'discord-interactions';
 import { IDiscordInteraction } from '@app/interfaces/IDiscordInteraction';
 import DiscordInteraction from '@app/classes/DiscordInteraction';
+import { CommandOptionType } from '@app/enums/CommandOptionType';
 
 export default async function (
   req: Request<any, any, IDiscordInteraction>,
@@ -34,7 +35,17 @@ export default async function (
       const interactionResponse = await interact(interaction);
       return res.send(interactionResponse);
     }
+    case InteractionType.APPLICATION_COMMAND_AUTOCOMPLETE: {
+      const { name } = data;
+      if (!commands.has(name)) {
+        return res.status(500).send('Command not found');
+      }
+      const { autocomplete } = commands.get(name);
+      const interactionResponse = await autocomplete(interaction);
+      return res.send(interactionResponse);
+    }
     default:
+      console.log('Unknown interaction', type, data);
       return res.status(400).send('Unknown action');
   }
 }

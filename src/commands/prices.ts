@@ -3,12 +3,21 @@ import { ICommand } from '@app/interfaces/ICommand';
 import { Region } from '@app/enums/Region';
 import { log } from '@app/utils/Logger';
 import { DiscordRequest } from '@app/utils/DiscordRequest';
-import { APP_ID, GUILD_ID } from '@app/config';
+import { APP_ID } from '@app/config';
 import { ApiEndpoint, ApiRequest } from '@app/utils/ApiRequest';
 import DiscordInteraction from '@app/classes/DiscordInteraction';
 import { InteractionResponseType } from 'discord-interactions';
 import { LiveMarketItem } from '@app/types/API/LiveMarketItem';
 import moment from 'moment';
+import items from '@app/data/items';
+import { ICommandChoice } from '@app/interfaces/ICommandChoice';
+
+const AutocompleteFieldMap: Record<string, ICommandChoice[]> = {
+  item: Object.entries(items).map(([value, name]) => ({
+    name,
+    value,
+  })),
+};
 
 export const command: ICommand = {
   name: 'prices',
@@ -30,8 +39,41 @@ export const command: ICommand = {
       description: 'The item to get prices from',
       type: CommandOptionType.STRING,
       required: true,
+      autocomplete: true,
     },
   ],
+};
+
+export const autocomplete = async (
+  interaction: DiscordInteraction,
+): Promise<any> => {
+  const focused = interaction.getFocusedOption();
+  const choices = [];
+
+  if (focused) {
+    const { name, value } = focused;
+    const autocompleteObject = AutocompleteFieldMap[name];
+    if (autocompleteObject) {
+      choices.push(
+        ...autocompleteObject
+          .filter(
+            (option) =>
+              option.name.indexOf(value) > -1 ||
+              option.value.indexOf(value) > -1,
+          )
+          .slice(0, 25),
+      );
+    }
+  }
+
+  console.log({ focused, choices });
+
+  return {
+    type: InteractionResponseType.APPLICATION_COMMAND_AUTOCOMPLETE_RESULT,
+    data: {
+      choices,
+    },
+  };
 };
 
 export const interact = async (
@@ -111,13 +153,7 @@ export const setup = async (command: ICommand): Promise<void> => {
   /**
    * @TODO: Refactor the command registration to a sole responsibility helper
    */
-  const endpoint = [
-    'applications',
-    APP_ID,
-    'guilds',
-    GUILD_ID,
-    'commands',
-  ].join('/');
+  const endpoint = ['applications', APP_ID, 'commands'].join('/');
   const response = await DiscordRequest(endpoint, {
     method: 'POST',
     body: command,
