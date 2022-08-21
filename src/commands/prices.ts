@@ -66,8 +66,6 @@ export const autocomplete = async (
     }
   }
 
-  console.log({ focused, choices });
-
   return {
     type: InteractionResponseType.APPLICATION_COMMAND_AUTOCOMPLETE_RESULT,
     data: {
