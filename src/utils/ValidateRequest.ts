@@ -1,6 +1,5 @@
 import { verifyKey } from 'discord-interactions';
 import { Request } from 'express';
-import { log } from '@app/utils/Logger';
 import { PUBLIC_KEY } from '@app/config';
 
 export function ValidateRequest(req: Request): boolean {

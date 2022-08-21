@@ -1,6 +1,5 @@
 import { HTTP_USER_AGENT, LAMO_API_URL } from '@app/config';
 import { Region } from '@app/enums/Region';
-import { log } from '@app/utils/Logger';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 const apiClient = axios.create({

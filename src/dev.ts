@@ -7,7 +7,7 @@ const app = express();
 
 app.use(express.json());
 
-app.post('/interactions', InteractionsController);
+app.post('/interactions', (req, res) => InteractionsController(req, res));
 
 app.listen(APP_PORT, () => {
   log.info('Application listening @', APP_PORT);

@@ -1,16 +1,19 @@
 {
-  "name": "lamo-price-bot",
+  "name": "@lamo/bot",
   "author": "Dejan Bozhinoski <bozhinoski@icloud.com>",
   "version": "0.1.0",
   "description": "Discord Bot that integrates Lost Ark Market Online API",
   "engines": {
     "node": ">= 16.13 <17"
   },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "prepare": "yarn build:release",
     "dev": "ts-node -r tsconfig-paths/register src/dev.ts",
     "watch": "nodemon --exec ts-node -r tsconfig-paths/register src/dev.ts",
     "cmds:install": "ts-node -r tsconfig-paths/register src/cmds.ts",
-    "clean": "rimraf coverage build tmp",
+    "clean": "rimraf coverage dist tmp",
     "prebuild": "npm run lint",
     "build": "tsc -p tsconfig.json",
     "build:release": "npm run clean && tsc -p tsconfig.release.json",
