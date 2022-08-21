@@ -42,7 +42,7 @@ export default async function (
       }
 
       const command = commands.get(name);
-      if (overwrites[name]) {
+      if (overwrites && overwrites[name]) {
         Object.assign(command, overwrites[name]);
       }
 
