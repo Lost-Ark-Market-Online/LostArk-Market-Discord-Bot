@@ -154,7 +154,7 @@ export const setup = async (command: ICommand): Promise<void> => {
   const endpoint = ['applications', APP_ID, 'commands'].join('/');
   const response = await DiscordRequest(endpoint, {
     method: 'POST',
-    body: command,
+    data: command,
   });
-  log.debug('Discord commands API response', await response.json());
+  log.debug('Discord commands API response', response.data);
 };

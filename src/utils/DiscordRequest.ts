@@ -1,30 +1,21 @@
-import { DISCORD_API_URL, DISCORD_TOKEN } from '@app/config';
-import fetch, { Response } from 'node-fetch';
-import { log } from '@app/utils/Logger';
+import { DISCORD_API_URL, DISCORD_TOKEN, HTTP_USER_AGENT } from '@app/config';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
-const BOT_USER_AGENT = process.env.BOT_USER_AGENT || 'DiscordBot';
+const apiClient = axios.create({
+  baseURL: DISCORD_API_URL,
+  headers: {
+    Authorization: ['Bot', DISCORD_TOKEN].join(' '),
+    'Content-Type': 'application/json; charset=UTF-8',
+    'User-Agent': HTTP_USER_AGENT,
+  },
+});
 
-export async function DiscordRequest(
+export async function DiscordRequest<T>(
   endpoint: string,
-  options: any,
-): Promise<Response> {
-  const url = [DISCORD_API_URL, endpoint].join('/');
-
-  if (options.body) options.body = JSON.stringify(options.body);
-  const res = await fetch(url, {
-    headers: {
-      Authorization: ['Bot', DISCORD_TOKEN].join(' '),
-      'Content-Type': 'application/json; charset=UTF-8',
-      'User-Agent': BOT_USER_AGENT,
-    },
+  options: AxiosRequestConfig,
+): Promise<AxiosResponse<T>> {
+  return apiClient({
+    url: endpoint,
     ...options,
   });
-
-  if (!res.ok) {
-    const data = await res.json();
-    console.log(res.status);
-    throw new Error(JSON.stringify(data));
-  }
-
-  return res;
 }
