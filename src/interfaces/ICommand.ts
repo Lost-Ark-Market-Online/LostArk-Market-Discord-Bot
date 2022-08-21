@@ -5,6 +5,8 @@ export interface ICommand {
   name: string;
   description?: string;
   required?: boolean;
+  autocomplete?: boolean;
+  focused?: boolean;
   value?: string;
   type?: CommandOptionType;
   options?: ICommand[];
