@@ -30,3 +30,6 @@ build/
 
 # Environment
 .env*
+
+# Build directory
+dist/
