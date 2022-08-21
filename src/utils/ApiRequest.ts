@@ -19,8 +19,8 @@ export enum ApiEndpoint {
 export async function ApiRequest<T>(
   endpoint: ApiEndpoint,
   region: Region,
-  options: AxiosRequestConfig<T>,
-): Promise<AxiosResponse> {
+  options: AxiosRequestConfig,
+): Promise<AxiosResponse<T>> {
   return apiClient({
     url: [endpoint, region.toString()].join('/'),
     ...options,

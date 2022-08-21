@@ -6,7 +6,7 @@ import { InteractionResponseType, InteractionType } from 'discord-interactions';
 import { IDiscordInteraction } from '@app/interfaces/IDiscordInteraction';
 import DiscordInteraction from '@app/classes/DiscordInteraction';
 
-export default function (
+export default async function (
   req: Request<any, any, IDiscordInteraction>,
   res: Response,
 ) {
@@ -31,8 +31,8 @@ export default function (
       }
 
       const { interact } = commands.get(name);
-      interact(interaction);
-      break;
+      const interactionResponse = await interact(interaction);
+      return res.send(interactionResponse);
     }
     default:
       return res.status(400).send('Unknown action');
