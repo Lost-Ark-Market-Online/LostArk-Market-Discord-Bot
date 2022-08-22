@@ -76,22 +76,27 @@ export const autocomplete = async (
 
 export const interact = async (
   interaction: DiscordInteraction,
+  interactionActionOverwrite?: any
 ): Promise<any> => {
   log.debug('Interact called', interaction);
   const region = interaction.getOptionValue('region');
   const itemId = interaction.getOptionValue('item');
   try {
+    let interactionAction = interactionActionOverwrite;
+    if(!interactionAction){
+      interactionAction = async () => ApiRequest<LiveMarketItem[]>(
+        ApiEndpoint.EXPORT_MARKET_LIVE,
+        Region[region],
+        {
+          params: {
+            items: itemId,
+          },
+        },
+      );
+    }
     const {
       data: [item],
-    } = await ApiRequest<LiveMarketItem[]>(
-      ApiEndpoint.EXPORT_MARKET_LIVE,
-      Region[region],
-      {
-        params: {
-          items: itemId,
-        },
-      },
-    );
+    } = await interactionAction();
 
     return {
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,

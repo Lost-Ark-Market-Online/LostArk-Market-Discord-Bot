@@ -12,6 +12,7 @@ export default async function (
   req: Request<any, any, IDiscordInteraction>,
   res: Response,
   overwrites?: Record<Command, Partial<ICommandModule>>,
+  interactionActionOverwrites?: Record<Command, any>,
 ) {
   const isValidRequest = ValidateRequest(req);
 
@@ -47,7 +48,7 @@ export default async function (
       }
 
       const { interact } = command;
-      const interactionResponse = await interact(interaction);
+      const interactionResponse = await interact(interaction, interactionActionOverwrites[name]);
       return res.send(interactionResponse);
     }
     case InteractionType.APPLICATION_COMMAND_AUTOCOMPLETE: {
