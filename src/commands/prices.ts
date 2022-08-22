@@ -96,7 +96,12 @@ export const interact = async (
     }
     const {
       data: [item],
-    } = await interactionAction();
+    } = await interactionAction({
+      params:{region},
+      query:{
+        items: itemId
+      }
+    });
 
     return {
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
