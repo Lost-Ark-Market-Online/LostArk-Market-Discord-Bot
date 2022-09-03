@@ -81,7 +81,7 @@ export const interact = async (
 
   const region = interaction.getOptionValue('region');
   const itemId = interaction.getOptionValue('item');
-  const itemName = interaction.getOptionName('item');
+  const itemName = items[itemId];
 
   try {
 
