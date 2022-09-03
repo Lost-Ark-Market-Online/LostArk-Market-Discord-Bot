@@ -104,6 +104,7 @@ export const interact = async (
         items: itemId
       }
     });
+    console.log("Interact: item", item);
 
     return {
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
