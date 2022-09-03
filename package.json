@@ -9,7 +9,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "prepare": "yarn build:release",
+    "prepare": "npm run build:release",
     "dev": "ts-node -r tsconfig-paths/register src/dev.ts",
     "watch": "nodemon --exec ts-node -r tsconfig-paths/register src/dev.ts",
     "cmds:install": "ts-node -r tsconfig-paths/register src/cmds.ts",
