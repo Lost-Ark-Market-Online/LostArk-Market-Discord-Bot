@@ -78,10 +78,13 @@ export const interact = async (
   interaction: DiscordInteraction,
   interactionActionOverwrite?: any
 ): Promise<any> => {
-  log.debug('Interact called', interaction);
+
   const region = interaction.getOptionValue('region');
   const itemId = interaction.getOptionValue('item');
+  const itemName = interaction.getOptionName('item');
+
   try {
+
     let interactionAction = interactionActionOverwrite;
     if (!interactionAction) {
       interactionAction = async () => {
@@ -97,21 +100,20 @@ export const interact = async (
         return response.data;
       }
     }
-    console.log("Interact: itemId", itemId);
+
     const [item] = await interactionAction({
       params: { region: Region[region] },
       query: {
         items: itemId
       }
     });
-    console.log("Interact: item", item);
 
     return {
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
       data: {
         embeds: [
           {
-            description: `**${item.name}**`,
+            description: `**${itemName}**`,
             color: 12691833,
             fields: [
               {
