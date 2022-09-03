@@ -96,14 +96,14 @@ export const interact = async (
       );
     }
     console.log("Interact: itemId", itemId);
-    const {
-      data: [item],
-    } = await interactionAction({
+    const response = await interactionAction({
       params: { region: Region[region] },
       query: {
         items: itemId
       }
     });
+    console.log("Interact: response", response);
+    const item = response.data[0]
     console.log("Interact: item", item);
 
     return {
