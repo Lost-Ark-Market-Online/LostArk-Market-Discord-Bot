@@ -30,7 +30,7 @@ export const command: ICommand = {
       type: CommandOptionType.STRING,
       required: true,
       choices: Object.entries(Region).map(([value, name]) => ({
-        name: value as string,
+        name,
         value: value as string,
       })),
     },
@@ -83,7 +83,7 @@ export const interact = async (
   const itemId = interaction.getOptionValue('item');
   try {
     let interactionAction = interactionActionOverwrite;
-    if(!interactionAction){
+    if (!interactionAction) {
       console.log("No Overwrite found");
       interactionAction = async () => ApiRequest<LiveMarketItem[]>(
         ApiEndpoint.EXPORT_MARKET_LIVE,
@@ -99,8 +99,8 @@ export const interact = async (
     const {
       data: [item],
     } = await interactionAction({
-      params:{region},
-      query:{
+      params: { region: Region[region] },
+      query: {
         items: itemId
       }
     });
