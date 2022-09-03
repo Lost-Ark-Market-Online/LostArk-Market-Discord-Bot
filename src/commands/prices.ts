@@ -84,6 +84,7 @@ export const interact = async (
   try {
     let interactionAction = interactionActionOverwrite;
     if(!interactionAction){
+      console.log("No Overwrite found");
       interactionAction = async () => ApiRequest<LiveMarketItem[]>(
         ApiEndpoint.EXPORT_MARKET_LIVE,
         Region[region],
@@ -94,6 +95,7 @@ export const interact = async (
         },
       );
     }
+    console.log("Interact: itemId", itemId);
     const {
       data: [item],
     } = await interactionAction({
