@@ -80,13 +80,7 @@ export const interact = async (
 ): Promise<any> => {
   log.debug('Interact called', interaction);
   const region = interaction.getOptionValue('region');
-  const itemName = interaction.getOptionValue('item');
-  console.log("itemName", itemName)
-  const reqItem = AutocompleteFieldMap.item.find(i=>i.name == itemName);
-  console.log("reqItem", reqItem)
-  if(!reqItem){
-    throw Error("Item not found");
-  }
+  const itemId = interaction.getOptionValue('item');
   try {
     let interactionAction = interactionActionOverwrite;
     if(!interactionAction){
@@ -95,7 +89,7 @@ export const interact = async (
         Region[region],
         {
           params: {
-            items: reqItem.value,
+            items: itemId,
           },
         },
       );
@@ -105,7 +99,7 @@ export const interact = async (
     } = await interactionAction({
       params:{region},
       query:{
-        items: reqItem.value
+        items: itemId
       }
     });
 
