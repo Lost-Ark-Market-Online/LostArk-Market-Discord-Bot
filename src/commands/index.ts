@@ -1,5 +1,5 @@
-import { ICommandModule } from '@app/interfaces/ICommandModule';
-import { Command } from '@app/enums';
+import { ICommandModule } from '../interfaces/ICommandModule';
+import { Command } from '../enums';
 import * as prices from './prices';
 
 export const commands: Map<Command, ICommandModule> = new Map([

@@ -1,12 +1,12 @@
-import { commands } from '@app/commands';
+import { commands } from '../commands';
 import { Request, Response } from 'express';
-import { ValidateRequest } from '@app/utils/ValidateRequest';
+import { ValidateRequest } from '../utils/ValidateRequest';
 import { InteractionResponseType, InteractionType } from 'discord-interactions';
-import { IDiscordInteraction } from '@app/interfaces/IDiscordInteraction';
-import DiscordInteraction from '@app/classes/DiscordInteraction';
-import { ICommandModule } from '@app/interfaces';
-import { Command, HttpStatusCode } from '@app/enums';
-import { log } from '@app/utils/Logger';
+import { IDiscordInteraction } from '../interfaces/IDiscordInteraction';
+import DiscordInteraction from '../classes/DiscordInteraction';
+import { ICommandModule } from '../interfaces';
+import { Command, HttpStatusCode } from '../enums';
+import { log } from '../utils/Logger';
 
 export default async function (
   req: Request<any, any, IDiscordInteraction>,

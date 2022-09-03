@@ -1,16 +1,16 @@
-import { CommandOptionType } from '@app/enums/CommandOptionType';
-import { ICommand } from '@app/interfaces/ICommand';
-import { Region } from '@app/enums/Region';
-import { log } from '@app/utils/Logger';
-import { DiscordRequest } from '@app/utils/DiscordRequest';
-import { APP_ID } from '@app/config';
-import { ApiEndpoint, ApiRequest } from '@app/utils/ApiRequest';
-import DiscordInteraction from '@app/classes/DiscordInteraction';
+import { CommandOptionType } from '../enums/CommandOptionType';
+import { ICommand } from '../interfaces/ICommand';
+import { Region } from '../enums/Region';
+import { log } from '../utils/Logger';
+import { DiscordRequest } from '../utils/DiscordRequest';
+import { APP_ID } from '../config';
+import { ApiEndpoint, ApiRequest } from '../utils/ApiRequest';
+import DiscordInteraction from '../classes/DiscordInteraction';
 import { InteractionResponseType } from 'discord-interactions';
-import { LiveMarketItem } from '@app/types/API/LiveMarketItem';
+import { LiveMarketItem } from '../types/API/LiveMarketItem';
 import moment from 'moment';
-import items from '@app/data/items';
-import { ICommandChoice } from '@app/interfaces/ICommandChoice';
+import items from '../data/items';
+import { ICommandChoice } from '../interfaces/ICommandChoice';
 
 const AutocompleteFieldMap: Record<string, ICommandChoice[]> = {
   item: Object.entries(items).map(([value, name]) => ({

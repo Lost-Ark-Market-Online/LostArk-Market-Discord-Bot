@@ -19,10 +19,7 @@
     "noFallthroughCasesInSwitch": false,
     "noImplicitAny": false,
     "baseUrl": "./src",
-    "outDir": "./dist",
-    "paths": {
-      "@app/*": ["*"]
-    }
+    "outDir": "./dist"
   },
   "exclude": ["node_modules", "dist"],
   "include": ["src/**/*"]

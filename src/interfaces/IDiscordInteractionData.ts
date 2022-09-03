@@ -1,4 +1,4 @@
-import { Command } from '@app/enums';
+import { Command } from '../enums';
 import { ICommand } from './ICommand';
 
 export interface IDiscordInteractionData {

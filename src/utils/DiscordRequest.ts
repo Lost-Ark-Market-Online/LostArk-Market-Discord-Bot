@@ -1,4 +1,4 @@
-import { DISCORD_API_URL, DISCORD_TOKEN, HTTP_USER_AGENT } from '@app/config';
+import { DISCORD_API_URL, DISCORD_TOKEN, HTTP_USER_AGENT } from '../config';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 const apiClient = axios.create({

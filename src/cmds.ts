@@ -1,3 +1,3 @@
-import { commands } from '@app/commands';
+import { commands } from './commands';
 
 commands.forEach(({ setup, command }) => setup(command));

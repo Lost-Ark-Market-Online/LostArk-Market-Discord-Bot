@@ -1,5 +1,5 @@
-import { CommandOptionType } from '@app/enums/CommandOptionType';
-import { ICommandChoice } from '@app/interfaces/ICommandChoice';
+import { CommandOptionType } from '../enums/CommandOptionType';
+import { ICommandChoice } from '../interfaces/ICommandChoice';
 
 export interface ICommand {
   name: string;

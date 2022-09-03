@@ -1,5 +1,5 @@
-import { IDiscordInteraction } from '@app/interfaces/IDiscordInteraction';
-import { IDiscordInteractionData } from '@app/interfaces/IDiscordInteractionData';
+import { IDiscordInteraction } from '../interfaces/IDiscordInteraction';
+import { IDiscordInteractionData } from '../interfaces/IDiscordInteractionData';
 
 export default class DiscordInteraction implements IDiscordInteraction {
   constructor(

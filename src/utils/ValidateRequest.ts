@@ -1,6 +1,6 @@
 import { verifyKey } from 'discord-interactions';
 import { Request } from 'express';
-import { PUBLIC_KEY } from '@app/config';
+import { PUBLIC_KEY } from '../config';
 
 export function ValidateRequest(req: Request): boolean {
   const { body } = req;
