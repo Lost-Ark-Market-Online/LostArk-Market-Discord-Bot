@@ -30,7 +30,7 @@ export const command: ICommand = {
       type: CommandOptionType.STRING,
       required: true,
       choices: Object.entries(Region).map(([value, name]) => ({
-        name,
+        name: value as string,
         value: value as string,
       })),
     },
