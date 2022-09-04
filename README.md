@@ -7,12 +7,11 @@
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/20998381/188296047-3a3abbf0-6529-4aa7-bc58-96b0a1fce02a.png" alt="Lamo Logo"/>
+  <h1>Lost Ark Market Discord Bot</h1>
 </p>
 <p align="center">
-<h1>Lost Ark Market Discord Bot</h1>
+
 </p>
 
 <h2>Example Usage:</h2>
-![Discord_nNmLCBck8S](https://user-images.githubusercontent.com/20998381/188296287-898df42e-924e-4852-babc-1c1843c32967.gif)
-
-
+![Discord_nNmLCBck8S](https://user-images.githubusercontent.com/20998381/188296388-fbbafcd5-4ef1-4094-927d-1d84ace75ce3.gif)
