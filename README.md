@@ -1,16 +1,13 @@
 # LostArk-Market-Discord-Bot
 
-[TypeScript version][ts-badge]][typescript-4-7]
-[Node.js version][nodejs-badge]][nodejs]
+[![TypeScript version][ts-badge]][typescript-4-7]
+[![Node.js version][nodejs-badge]][nodejs]
 [![APLv2][license-badge]][license]
 [![Build Status - GitHub Actions][gha-badge]][gha-ci]
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/20998381/188296047-3a3abbf0-6529-4aa7-bc58-96b0a1fce02a.png" alt="Lamo Logo"/>
-  <h1>Lost Ark Market Discord Bot</h1>
-</p>
-<p align="center">
-
+ <center> <h1>Lost Ark Market Discord Bot</h1></center>
 </p>
 
 <h2>Example Usage:</h2>
