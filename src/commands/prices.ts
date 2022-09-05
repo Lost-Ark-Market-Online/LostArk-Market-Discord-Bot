@@ -179,7 +179,9 @@ export const interact = async (
               url: item.image,
             },
             footer: {
-              text: 'Prices are sourced by our community of Market Watchers.'
+              text: 'Prices are sourced by our community of Market Watchers',
+              icon_url:
+                'https://www.lostarkmarket.online/assets/icons/favicon.png',
             },
           },
         ],
