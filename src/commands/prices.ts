@@ -179,7 +179,7 @@ export const interact = async (
               url: item.image,
             },
             footer: {
-              text: ''
+              text: 'Prices are sourced by our community of Market Watchers.'
             },
           },
         ],
