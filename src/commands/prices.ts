@@ -122,6 +122,15 @@ export const interact = async (
         break;
     }
 
+    const colorMap = [
+      0xffffff,
+      0x93ee24,
+      0x17a7e6,
+      0xb249d4,
+      0xe8921b,
+      0xe66516,
+    ]
+
     const embedFields = [
       {
         name: 'Recent Price',
@@ -157,8 +166,8 @@ export const interact = async (
       data: {
         embeds: [
           {
-            description: `**${itemName}${item.amount > 1 ? ' x' + item.amount : ''}**`,
-            color: 12691833,
+            title: `**${itemName}${item.amount > 1 ? ' x' + item.amount : ''}**`,
+            color: colorMap[item.rarity],
             fields: embedFields,
             author: {
               name: 'LostarkMarket.online',
@@ -168,6 +177,9 @@ export const interact = async (
             },
             thumbnail: {
               url: item.image,
+            },
+            footer: {
+              text: ''
             },
           },
         ],
