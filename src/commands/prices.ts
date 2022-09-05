@@ -108,46 +108,62 @@ export const interact = async (
       }
     });
 
+    let multiplier = 1;
+    let hideParams = false;
+    switch(itemName){
+      case 'Blue Crystal':
+        multiplier = 95;
+        hideParams = true;
+        break;
+      case 'Rpyal Crystal':
+        multiplier = 238;
+        hideParams = true;
+        break;
+    }
+
+    const embedFields = [
+      {
+        name: 'Recent Price',
+        value: `${item.recentPrice * multiplier} <:gold:976615153485352960>`,
+        inline: true,
+      },
+      {
+        name: 'Lowest Price',
+        value: `${item.lowPrice * multiplier} <:gold:976615153485352960>`,
+        inline: true,
+      },
+      {
+        name: 'Cheapest Rem.',
+        value: item.cheapestRemaining,
+        inline: true,
+      },
+      {
+        name: 'Region',
+        value: Region[region],
+        inline: true,
+      },
+      {
+        name: 'Last update',
+        value: moment
+          .duration(moment(item.updatedAt).diff(moment()))
+          .humanize(true),
+        inline: true,
+      },
+    ].filter(i=>!hideParams || !['Lowest Price','Cheapest Rem.'].includes(i.name));
+
     return {
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
       data: {
         embeds: [
           {
-            description: `**${itemName}**`,
+            description: `**${itemName}${item.amount > 1 ? 'x' + (item.amount * multiplier) : ''}**`,
             color: 12691833,
-            fields: [
-              {
-                name: 'Recent Price',
-                value: `${item.recentPrice} <:gold:976615153485352960>`,
-                inline: true,
-              },
-              {
-                name: 'Lowest Price',
-                value: `${item.lowPrice} <:gold:976615153485352960>`,
-                inline: true,
-              },
-              {
-                name: 'Cheapest Rem.',
-                value: item.cheapestRemaining,
-                inline: true,
-              },
-              {
-                name: 'Region',
-                value: Region[region],
-                inline: true,
-              },
-              {
-                name: 'Last update',
-                value: moment
-                  .duration(moment(item.updatedAt).diff(moment()))
-                  .humanize(true),
-                inline: true,
-              },
-            ],
+            fields: embedFields,
             author: {
-              name: 'LostarkMarket.Online',
+              name: 'LostarkMarket.online',
               icon_url:
                 'https://www.lostarkmarket.online/assets/icons/favicon.png',
+              url: 'https://www.lostarkmarket.online'
             },
             thumbnail: {
               url: item.image,
