@@ -115,7 +115,7 @@ export const interact = async (
         multiplier = 95;
         hideParams = true;
         break;
-      case 'Rpyal Crystal':
+      case 'Royal Crystal':
         multiplier = 238;
         hideParams = true;
         break;
@@ -156,7 +156,7 @@ export const interact = async (
       data: {
         embeds: [
           {
-            description: `**${itemName}${item.amount > 1 ? 'x' + (item.amount * multiplier) : ''}**`,
+            description: `**${itemName}${(item.amount * multiplier) > 1 ? 'x' + (item.amount * multiplier) : ''}**`,
             color: 12691833,
             fields: embedFields,
             author: {
