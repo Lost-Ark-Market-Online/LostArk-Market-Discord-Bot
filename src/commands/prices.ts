@@ -108,15 +108,16 @@ export const interact = async (
       }
     });
 
-    let multiplier = 1;
     let hideParams = false;
-    switch(itemName){
+    switch (itemName) {
       case 'Blue Crystal':
-        multiplier = 95;
+        item.recentPrice = Math.round(item.recentPrice * 95);
+        item.amount = 95;
         hideParams = true;
         break;
       case 'Royal Crystal':
-        multiplier = 238;
+        item.recentPrice = Math.round(item.recentPrice * 238);
+        item.amount = 238;
         hideParams = true;
         break;
     }
@@ -124,12 +125,12 @@ export const interact = async (
     const embedFields = [
       {
         name: 'Recent Price',
-        value: `${item.recentPrice * multiplier} <:gold:976615153485352960>`,
+        value: `${item.recentPrice} <:gold:976615153485352960>`,
         inline: true,
       },
       {
         name: 'Lowest Price',
-        value: `${item.lowPrice * multiplier} <:gold:976615153485352960>`,
+        value: `${item.lowPrice} <:gold:976615153485352960>`,
         inline: true,
       },
       {
@@ -149,14 +150,14 @@ export const interact = async (
           .humanize(true),
         inline: true,
       },
-    ].filter(i=>!hideParams || !['Lowest Price','Cheapest Rem.'].includes(i.name));
+    ].filter(i => !hideParams || !['Lowest Price', 'Cheapest Rem.'].includes(i.name));
 
     return {
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
       data: {
         embeds: [
           {
-            description: `**${itemName}${(item.amount * multiplier) > 1 ? ' x' + (item.amount * multiplier) : ''}**`,
+            description: `**${itemName}${item.amount > 1 ? ' x' + item.amount : ''}**`,
             color: 12691833,
             fields: embedFields,
             author: {
