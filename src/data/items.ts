@@ -708,7 +708,7 @@ export default {
   "tailoring-basic-mending-3": "Tailoring: Basic Mending",
   "protection-stone-1": "Protection Stone",
   "obliteration-stone-1": "Obliteration Stone",
-  "superior-oreha-fusion-material-4": "Superior Oreha Fusion Material",
+  "superior-oreha-fusion-material-3": "Superior Oreha Fusion Material",
   "marvelous-honor-leapstone-3": "Marvelous Honor Leapstone",
   "tailoring-advanced-mending-5": "Tailoring: Advanced Mending",
   "metallurgy-advanced-welding-5": "Metallurgy: Advanced Welding",
