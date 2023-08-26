@@ -17,11 +17,12 @@ export default async function (
   const isValidRequest = ValidateRequest(req);
 
   if (!isValidRequest) {
-    return res.status(HttpStatusCode.UNPROCESSABLE_ENTITY).send({
+    res.status(HttpStatusCode.UNPROCESSABLE_ENTITY).send({
       code: HttpStatusCode.UNPROCESSABLE_ENTITY,
       message: 'Signature validation failed.',
       timestamp: Date.now(),
     });
+    return null;
   }
 
   // If the request originates from Discord, then we try to find the command
@@ -31,15 +32,17 @@ export default async function (
 
   switch (type) {
     case InteractionType.PING:
-      return res.send({ type: InteractionResponseType.PONG });
+      res.send({ type: InteractionResponseType.PONG });
+      return null;
     case InteractionType.APPLICATION_COMMAND: {
       const { name } = data;
       if (!commands.has(name)) {
-        return res.status(HttpStatusCode.NOT_FOUND).send({
+        res.status(HttpStatusCode.NOT_FOUND).send({
           code: HttpStatusCode.NOT_FOUND,
           message: `Command "${name}" not found.`,
           timestamp: Date.now(),
         });
+        return null;
       }
 
       const command = commands.get(name);
@@ -49,27 +52,31 @@ export default async function (
 
       const { interact } = command;
       const interactionResponse = await interact(interaction, interactionActionOverwrites[name]);
-      return res.send(interactionResponse);
+      res.send(interactionResponse);
+      return null;
     }
     case InteractionType.APPLICATION_COMMAND_AUTOCOMPLETE: {
       const { name } = data;
       if (!commands.has(name)) {
-        return res.status(HttpStatusCode.NOT_FOUND).send({
+        res.status(HttpStatusCode.NOT_FOUND).send({
           code: HttpStatusCode.NOT_FOUND,
           message: `Command "${name}" not found.`,
           timestamp: Date.now(),
         });
+        return null;
       }
       const { autocomplete } = commands.get(name);
       const interactionResponse = await autocomplete(interaction);
-      return res.send(interactionResponse);
+      res.send(interactionResponse);
+      return null;
     }
     default:
       log.error('Unhandled Discord interaction', body);
-      return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).send({
+      res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).send({
         code: HttpStatusCode.INTERNAL_SERVER_ERROR,
         message: 'Unhandled Discord interaction',
         timestamp: Date.now(),
       });
-  }
+  }  
+  return null;
 }
